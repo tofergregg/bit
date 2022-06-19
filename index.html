@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bit</title>
+        <link rel="stylesheet" href="css/bitstyle.css" />
+    </head>
+    <body onload="init()">
+<div id="canvascontainer">
+    <canvas id="bitCanvas" width="1100" height="650" style="border:1px solid #000000;"></canvas>
+    <div id="repl-label">Bit REPL:</div>
+    <div id="replcontainer"> </div>
+    <div id="main-label"><b>Program:</b> <span id="progName"></span> <b>World:</b> <select name="worldSel" id="worldSel"></select> <b>Language:</b> 
+        <select name="langSel" id="langSel" onchange="changeLang()">
+            <option value="js">Javascript</option>
+            <option value="python">Python</option>
+        </select>
+    </div>
+    <div id="maincontainer"> </div>
+    <div class="slidecontainer">
+        <center>Speed: <span id="speed" /></center>
+        <input type="range" min="1" max="100" value="75" class="slider" id="speedRange">
+    </div>
+    <div class="stepscontainer">
+        <center><code><span id="first-func"></span></code></center>
+        <input type="range" min="1" max="100" value="1" class="steps-slider" id="stepsRange">
+        <center style="color:blue; style="color:blue;"">
+            <button type="button" class="animButton" onclick="playClicked()" id="playButton">Play</button> 
+            <button type="button" class="animButton" onclick="stopClicked()" id="stopButton">Stop</button> 
+            <button type="button" class="animButton" onclick="stepClicked()" id="stepButton">Step</button> 
+            <button type="button" class="animButton" onclick="backClicked()" id="backButton">Back</button>
+        </center>
+    </div>
+    <div class="loadsavecontainer">
+            <input type="image" class="loadSaveButton" onclick="loadProgramWindow()" id="loadButton" src="img/load-icon.png" width="50px" alt="Load" title="Load"/>
+            <!--<input type="image" class="loadSaveButton" onclick="save()" id="saveButton" src="img/save-icon.png" width="50px" alt="Save" title="Save"/>-->
+    </div>
+    <div class="info-icon-container">
+        <input type="image" onclick="toggleVisibility('bit-reference')" id="infoButton" src="img/bit-reference.png" width="100px" alt="Bit Reference" title="Bit Reference"/>
+    </div>
+    <div class="reset-container">
+        <button type="button" onclick="resetCode()">Reset my code</button>
+    </div>
+    <div class="ref-container" id="bit-reference">
+        Bit is a robot that understands a small amount of Javascript to move around its world.
+        <p />
+        The <code>bit</code> object is pre-defined, and has the following functions:
+        <ul>
+            <li><code>bit.move()</code> moves Bit one position forward. Bit cannot go past the outside of its world, nor can it move through the walls, which are black. Any attempts to move outside of the world or into walls causes an error. Bit's eyes always face in the direction Bit will travel in, if it receives a <code>bit.move()</code> call.</li>
+            <li><code>bit.right()</code> turns Bit clockwise 90º. Bit can turn anywhere in the world.</li>
+            <li><code>bit.left()</code> turns Bit counterclockwise 90º.</li>
+            <li><code>bit.paint(color)</code>, where color is either <code>'red'</code>, <code>'blue'</code>, or <code>'green'</code>, paints Bit's current location that color. Any other color strings cause an error.</li>
+            <li><code>bit.front_clear()</code> returns <code>true</code> if bit can move forward (i.e. it is not blocked by a wall or the edge of the world), and <code>false</code> if Bit is blocked in the direction it is facing.</li>
+            <li><code>bit.left_clear()</code> returns <code>true</code> if there is <i>not</i> a wall or the edge of the world to Bit's left, and <code>false</code> if there is a wall or edge of the world to Bit's left. Bit's "left" is actually above its eyes.</li>
+            <li><code>bit.right_clear()</code> returns <code>true</code> if there is <i>not</i> a wall or the edge of the world to Bit's right, and <code>false</code> if there is a wall or edge of the world to Bit's right. Bit's "right" is actually below its front foot.</li>
+            <li><code>bit.get_color()</code> returns either <code>'red'</code>, <code>'green'</code>, <code>'blue'</code>, or <code>null</code>, depending on the color of the location Bit is on (<code>null</code> indicates that there is no color at that location).</li>
+            <li><code>bit.erase()</code> clears the current position of its color.</li>
+            <li><code>bit.reset()</code> resets Bit to its original location when the world is loaded.</li>
+        </ul>
+        The Bit REPL window allows one-statement javascript code, e.g., <code>bit.move()</code> or <code>bit.get_color()</code>. If the statement returns a value, it is printed in the terminal. It can also be used to run functions from the main Program window.
+
+    </div>
+    <div class="ref-container" id="load">
+        Please choose a program to load:<p />
+        <div id="programList">
+        </div>
+    </div>
+    <div class="ref-container viz" id="spinner">
+        Please wait...<br>
+        <img src="spinner.gif" width="20%">
+    </div>
+</div>
+<!--<button id="pyButton" onclick="runPy()">py</button>-->
+<div style="display:none;" id="bit-images">
+  <!--bit images are 500w, 500w-->
+  <img id="bit_right" src="img/bit-right.png">
+  <img id="bit_down"  src="img/bit-down.png">
+  <img id="bit_left"  src="img/bit-left.png">
+  <img id="bit_up"    src="img/bit-up.png">
+  <img id="bit_blank" src="img/bit-blank.png">
+  <img id="red_square" src="img/red-square.png">
+  <img id="green_square" src="img/green-square.png">
+  <img id="blue_square" src="img/blue-square.png">
+  <img id="wall" src="img/wall.png">
+</div>
+<script src="js/brython.min.js">
+</script>
+<script src="js/brython_stdlib.js">
+</script>
+<script type="text/python" src="py/bit.py"></script>
+<script src="js/theme.js"></script>
+<script src="js/bit-programs.js"></script>
+<script src="js/bit.js"></script>
+<script src="js/jshint.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.0/beautify.js"></script>
+<script src="js/repl-editor.bundle.js"></script>
+<script src="js/main-editor.bundle.js"></script>
+</body>
+</html>

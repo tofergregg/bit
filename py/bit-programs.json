@@ -1,0 +1,74 @@
+[
+  {
+    "name": "Simple Bit Problems",
+    "type": "divider"
+  },
+  {
+    "name": "place flag",
+    "type": "program",
+    "worlds": [
+      {
+        "dim": "8x6",
+        "world": "wwwwwwwwww\nw        w\nw        w\nw    WWWWw\nw    WWWWw\nw>   WWWWw\nwWWWWWWWWw\nwwwwwwwwww\n"
+      },
+      {
+        "dim": "13x11",
+        "world": "wwwwwwwwwwwwwww\nw             w\nw             w\nw         WWWWw\nw         WWWWw\nw         WWWWw\nw         WWWWw\nw         WWWWw\nw         WWWWw\nw         WWWWw\nw>        WWWWw\nwWWWWWWWWWWWWWw\nwwwwwwwwwwwwwww\n"
+      }
+    ],
+    "program": {
+      "js": "function place_flag(bit) {\n    // places a flag at the top of the mountain\n    while (bit.front_clear()) {\n        bit.move();\n    }\n    bit.left();\n    while (!bit.right_clear()) {\n        bit.move();\n    }\n    bit.right();\n    bit.move();\n    while (bit.front_clear() && !bit.right_clear()) {\n        bit.move();\n    }\n    bit.paint('red');\n    climb_down(bit);\n    // return to original direction\n    bit.right();\n    bit.right();\n}\n\nfunction climb_down(bit) {\n    bit.right();\n    bit.right();\n    while (!bit.left_clear()) {\n        bit.move();\n    }\n    bit.left();\n    while (bit.front_clear()) {\n        bit.move();\n    }\n    bit.right();\n    while (bit.front_clear()) {\n        bit.move();\n    }\n}\n",
+      "python": "def place_flag(bit):\n    while bit.front_clear():\n        bit.move()\n    bit.left()\n    while not bit.right_clear():\n        bit.move()\n    bit.right()\n    bit.move()\n    while bit.front_clear() and not bit.right_clear():\n        bit.move()\n    bit.paint('red')\n    climb_down(bit)\n    bit.right()\n    bit.right()\n    return bit\n\ndef climb_down(bit):\n    bit.right()\n    bit.right()\n    while not bit.left_clear():\n        bit.move()\n    bit.left()\n    while bit.front_clear():\n        bit.move()\n    bit.right()\n    while bit.front_clear():\n        bit.move()\n"
+    }
+  },
+  {
+    "name": "bit1",
+    "type": "program",
+    "worlds": [
+      {
+        "dim": "3x3",
+        "world": "wwwww\nw>  w\nw   w\nw   w\nwwwww\n"
+      }
+    ],
+    "program": {
+      "js": "function do_bit1(bit) {\n    bit.move();\n    bit.paint('blue');\n    bit.right();\n    bit.move();\n    bit.paint('green');\n}\n",
+      "python": ""
+    }
+  },
+  {
+    "name": "bit2",
+    "type": "program",
+    "worlds": [
+      {
+        "dim": "4x6",
+        "world": "wwwwww\nw>   w\nw    w\nw    w\nw    w\nw    w\nw    w\nwwwwww\n"
+      }
+    ],
+    "program": {
+      "js": "function do_bit2(bit) {\n    bit.right();\n    bit.move();\n    bit.paint('green');\n    bit.move();\n    bit.paint('green');\n}\n",
+      "python": ""
+    }
+  },
+  {
+    "name": "Bit Loop",
+    "type": "divider"
+  },
+  {
+    "name": "go-green",
+    "type": "program",
+    "worlds": [
+      {
+        "dim": "12x3",
+        "world": "wwwwwwwwwwwwww\nw>           w\nw            w\nwwwwwwwwwwwwww\n"
+      },
+      {
+        "dim": "1x3",
+        "world": "www\nw>w\nw w\nwww\n"
+      }
+    ],
+    "program": {
+      "js": "function go_green(bit) {\n    while (bit.front_clear()) {\n        bit.move();\n        bit.paint('green');\n    }\n}\n",
+      "python": ""
+    }
+  }
+]

@@ -1,0 +1,38 @@
+How to bundle codemirror for website:
+
+1. Clone (into different dir):
+
+git clone https://github.com/codemirror/CodeMirror.git codemirror
+
+1a. Build:
+
+cd codemirror
+node bin/cm.js install
+
+
+2. Install rollup:
+
+npm install --global rollup
+npm i --global rollup @rollup/plugin-node-resolve
+
+Next steps from here: https://codemirror.net/6/examples/bundle/
+
+3. create editor.js:
+
+import {EditorState, EditorView, basicSetup} from "@codemirror/basic-setup"
+import {javascript} from "@codemirror/lang-javascript"
+
+let editor = new EditorView({
+  state: EditorState.create({
+    extensions: [basicSetup, javascript()]
+  }),
+  parent: document.body
+})
+
+4. Install another codemirror piece (may not be necessary):
+npm i @codemirror/basic-setup @codemirror/lang-javascript
+
+5. Run rollup:
+
+rollup editor.js -f iife -o editor.bundle.js -p @rollup/plugin-node-resolve
+
