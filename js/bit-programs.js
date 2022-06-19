@@ -223,12 +223,42 @@ def climb_down(bit):
         type: "program",
         worlds: [
             {
-                dim: "3x3",
+                dim: "3x3-case1",
                 world:
 `wwwww
 w>  w
 w   w
 w   w
+wwwww
+`,
+            },
+            {
+                dim: "3x3-case2",
+                world:
+`wwwww
+w> Ww
+wW Ww
+w   w
+wwwww
+`,
+            },
+            {
+                dim: "3x3-case3",
+                world:
+`wwwww
+wWW w
+w> Ww
+wW  w
+wwwww
+`,
+            },
+            {
+                dim: "3x3-case4",
+                world:
+`wwwww
+w W w
+wW> w
+w W w
 wwwww
 `,
             },
@@ -268,15 +298,43 @@ wwwww
         type: "program",
         worlds: [
             {
-                dim: "4x6",
+                dim: "3x3-case-1",
+                world:
+`wwwww
+w>  w
+w   w
+w   w
+wwwww
+`,
+            },
+            {
+                dim: "3x3-case-2",
+                world:
+`wwwww
+w>W w
+w W w
+w   w
+wwwww
+`,
+            },
+            {
+                dim: "3x3-case-3",
+                world:
+`wwwww
+wW> w
+w  Ww
+w   w
+wwwww
+`,
+            },
+            {
+                dim: "4x4",
                 world:
 `wwwwww
-w>   w
-w    w
-w    w
-w    w
-w    w
-w    w
+wWW>Ww
+wW   w
+wW   w
+w  W w
 wwwwww
 `,
             },
@@ -284,11 +342,7 @@ wwwwww
         program: {
             js:
 `function do_bit2(bit) {
-    bit.right();
-    bit.move();
-    bit.paint('green');
-    bit.move();
-    bit.paint('green');
+    // TODO: your code here
 }
 `,
             python:
@@ -298,11 +352,7 @@ wwwwww
     # Paint the square below the start square
     # green, and also the square below that.
     # Leave bit on the second green square, facing down.
-    bit.right()
-    bit.move()
-    bit.paint('green')
-    bit.move()
-    bit.paint('green')
+    pass
 `,
         },
     },
