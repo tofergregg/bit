@@ -14585,50 +14585,6 @@
    const treeHighlighter$1 = /*@__PURE__*/Prec$1.high(/*@__PURE__*/ViewPlugin$1.fromClass(TreeHighlighter$1, {
        decorations: v => v.decorations
    }));
-   /**
-   A default highlight style (works well with light themes).
-   */
-   const defaultHighlightStyle = /*@__PURE__*/HighlightStyle$1.define([
-       { tag: tags$1.meta,
-           color: "#7a757a" },
-       { tag: tags$1.link,
-           textDecoration: "underline" },
-       { tag: tags$1.heading,
-           textDecoration: "underline",
-           fontWeight: "bold" },
-       { tag: tags$1.emphasis,
-           fontStyle: "italic" },
-       { tag: tags$1.strong,
-           fontWeight: "bold" },
-       { tag: tags$1.strikethrough,
-           textDecoration: "line-through" },
-       { tag: tags$1.keyword,
-           color: "#708" },
-       { tag: [tags$1.atom, tags$1.bool, tags$1.url, tags$1.contentSeparator, tags$1.labelName],
-           color: "#219" },
-       { tag: [tags$1.literal, tags$1.inserted],
-           color: "#164" },
-       { tag: [tags$1.string, tags$1.deleted],
-           color: "#a11" },
-       { tag: [tags$1.regexp, tags$1.escape, /*@__PURE__*/tags$1.special(tags$1.string)],
-           color: "#e40" },
-       { tag: /*@__PURE__*/tags$1.definition(tags$1.variableName),
-           color: "#00f" },
-       { tag: /*@__PURE__*/tags$1.local(tags$1.variableName),
-           color: "#30a" },
-       { tag: [tags$1.typeName, tags$1.namespace],
-           color: "#085" },
-       { tag: tags$1.className,
-           color: "#167" },
-       { tag: [/*@__PURE__*/tags$1.special(tags$1.variableName), tags$1.macroName],
-           color: "#256" },
-       { tag: /*@__PURE__*/tags$1.definition(tags$1.propertyName),
-           color: "#00c" },
-       { tag: tags$1.comment,
-           color: "#940" },
-       { tag: tags$1.invalid,
-           color: "#f00" }
-   ]);
    const DefaultScanDist = 10000, DefaultBrackets = "()[]{}";
    function matchingNodes(node, dir, brackets) {
        let byProp = node.prop(dir < 0 ? NodeProp$1.openedBy : NodeProp$1.closedBy);
@@ -31239,6 +31195,7 @@
 
    // need to compile each time:
 
+
    const colors = {
        text: "#adbac7",
        bg: "#22272e",
@@ -31249,13 +31206,14 @@
        guttermarkerSubtleText: "#636e7b",
        linenumberText: "#768390",
        // cursor: "#cdd9e5",
-       cursor: "#ffffff",
+       // cursor: "#ffffff",
+       cursor: "#000000",
        //selectionBg: "rgba(108,182,255,0.3)",
        selectionBg: "rgba(0,182,255,0.3)",
        // activelineBg: "#2d333b",
        // activelineBg: "#e0e009",
        // activelineBg: "#6e6e2f",
-       activelineBg: "#00ffff",
+       activelineBg: "#011993",
        matchingbracketText: "#adbac7",
        linesBg: "#22272e",
        syntax: {
@@ -31271,7 +31229,7 @@
        }
    };
 
-   HighlightStyle.define([
+   const myHighlightStyle = HighlightStyle$1.define([
            {
                tag: [
                    tags.variableName,
@@ -31456,7 +31414,8 @@
                keymap.of([...defaultKeymap, ...historyKeymap]),
                //            javascript(),
                python(),
-                   syntaxHighlighting(defaultHighlightStyle),
+               // syntaxHighlighting(defaultHighlightStyle),
+               syntaxHighlighting(myHighlightStyle),
                    //            myHighlightStyle,
                    lineNumbers(),
                        highlightActiveLine(),

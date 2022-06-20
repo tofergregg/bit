@@ -6,10 +6,11 @@
 import {keymap, EditorView, highlightActiveLine, lineNumbers} from "@codemirror/view"
 import {EditorState} from "@codemirror/state"
 import {defaultKeymap, history, historyKeymap} from "@codemirror/commands"
-import {tags, HighlightStyle} from "@codemirror/highlight"
+import {tags} from "@codemirror/highlight"
 import {javascript} from "@codemirror/lang-javascript"
 import {python} from "@codemirror/lang-python"
-import {syntaxHighlighting, defaultHighlightStyle, indentUnit} from "@codemirror/language"
+import {HighlightStyle, syntaxHighlighting, defaultHighlightStyle, indentUnit} from "@codemirror/language"
+
 
 const colors = {
     text: "#adbac7",
@@ -21,13 +22,14 @@ const colors = {
     guttermarkerSubtleText: "#636e7b",
     linenumberText: "#768390",
     // cursor: "#cdd9e5",
-    cursor: "#ffffff",
+    // cursor: "#ffffff",
+    cursor: "#000000",
     //selectionBg: "rgba(108,182,255,0.3)",
     selectionBg: "rgba(0,182,255,0.3)",
     // activelineBg: "#2d333b",
     // activelineBg: "#e0e009",
     // activelineBg: "#6e6e2f",
-    activelineBg: "#00ffff",
+    activelineBg: "#011993",
     matchingbracketText: "#adbac7",
     linesBg: "#22272e",
     syntax: {
@@ -228,7 +230,8 @@ window.CodeMirrorMain = new EditorView({
             keymap.of([...defaultKeymap, ...historyKeymap]),
             //            javascript(),
             python(),
-                syntaxHighlighting(defaultHighlightStyle),
+            // syntaxHighlighting(defaultHighlightStyle),
+            syntaxHighlighting(myHighlightStyle),
                 //            myHighlightStyle,
                 lineNumbers(),
                     highlightActiveLine(),
