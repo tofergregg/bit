@@ -445,8 +445,8 @@ const showStep = () => {
         bit.bitLoc = JSON.parse(JSON.stringify(bitState.bitLoc));
         bit.drawWorld();
         const line = CodeMirrorMain.state.doc.line(bitState.lineNum);
-        CodeMirrorMain.dispatch({selection: {anchor: line.from}});
-        CodeMirrorMain.scrollPosIntoView(line.from);
+        CodeMirrorMain.dispatch({selection: {anchor: line.from}, scrollIntoView: true});
+        // CodeMirrorMain.scrollPosIntoView(line.from);
     } else {
         alert("Could not run program.");
     }
